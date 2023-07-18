@@ -23,7 +23,6 @@ export const UseAuthentication = () => {
         checkIfIsCancelled()
 
         setLoading(true)
-        setError(null)
 
 
         try{
