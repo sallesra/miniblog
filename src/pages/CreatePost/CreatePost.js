@@ -24,11 +24,11 @@ const CreatePost = () => {
 
     // validate image
     try {
-      new URL(image);
+      new URL(image)
     } catch (error) {
       setFormError("A imagem precisa ser uma URL.");
     }
-
+    
     // create tags array
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
@@ -37,19 +37,8 @@ const CreatePost = () => {
       setFormError("Por favor, preencha todos os campos!");
     }
 
-    console.log(tagsArray);
-
-    console.log({
-      title,
-      image,
-      body,
-      tags: tagsArray,
-      uid: user.uid,
-      createdBy: user.displayName,
-    });
-
-    if(formError) return
-
+    if(formError) return;
+    console.log(formError);
     insertDocument({
       title,
       image,
@@ -82,7 +71,7 @@ const CreatePost = () => {
                 <span>Url da imagem:</span>
                 <input 
                 type="text" 
-                name="imagem" 
+                name="image" 
                 required placeholder='Insira uma imagem que representa o seu post'  
                 onChange={(e) => setImage(e.target.value)} 
                 value={image}
@@ -107,7 +96,6 @@ const CreatePost = () => {
                 value={tags}
                 />
             </label>
-
             {!response.loading && <button className="btn">Cadastrar</button>}
             {response.loading && (
                 <button className="btn" disabled>
@@ -115,6 +103,7 @@ const CreatePost = () => {
                 </button>
                 )}
                 {response.error && <p className='error'>{response.error}</p>}
+                {formError && <p className='error'>{formError}</p>}
         </form>
     </div>
   );
